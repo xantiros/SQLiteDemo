@@ -24,9 +24,11 @@ namespace SQLiteDemo
 
         private void LoadPeopleList()
         {
-            people.Add(new PersonModel { FirstName = "Tim", LastName = "Kowal" });
-            people.Add(new PersonModel { FirstName = "John", LastName = "Doe" });
-            people.Add(new PersonModel { FirstName = "Mary", LastName = "Smith" });
+            people = SqliteDataAccess.LoadPeople();
+
+            //people.Add(new PersonModel { FirstName = "Tim", LastName = "Kowal" });
+            //people.Add(new PersonModel { FirstName = "John", LastName = "Doe" });
+            //people.Add(new PersonModel { FirstName = "Mary", LastName = "Smith" });
 
             WireUpPeopleList();
         }
@@ -41,7 +43,7 @@ namespace SQLiteDemo
 
         private void btnRefreshList_Click(object sender, EventArgs e)
         {
-            //LoadPeopleList();
+            LoadPeopleList();
         }
 
         private void btnAddPerson_Click(object sender, EventArgs e)
@@ -50,8 +52,10 @@ namespace SQLiteDemo
             p.FirstName = tbFirstName.Text;
             p.LastName = tbLastName.Text;
 
-            people.Add(p);
-            WireUpPeopleList();
+            //people.Add(p);
+            //WireUpPeopleList();
+
+            SqliteDataAccess.SavePerson(p);
 
             tbFirstName.Text = "";
             tbLastName.Text = "";
